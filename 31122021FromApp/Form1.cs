@@ -55,7 +55,7 @@ namespace _31122021FromApp
 
         private void btnKalanlar_Click(object sender, EventArgs e)
         {
-            var kalanlar = olist.Where(o => o.ortalama <= 44).ToList();
+            var kalanlar = olist.Where(o => o.ortalama <= 49).ToList();
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = kalanlar;
             temizle();
@@ -64,24 +64,33 @@ namespace _31122021FromApp
 
         private void btn_Basarili_Click(object sender, EventArgs e)
         {
-            var gecenler = olist.Where(o => o.ortalama >= 45).ToList();
+            var gecenler = olist.Where(o => o.ortalama >= 50).ToList();
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = gecenler;
             temizle();
 
         }
 
-
+        int secilenid;
+        Ortalama secogr;
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Ortalama secilen = (Ortalama)dataGridView1.CurrentRow.DataBoundItem;
-            txtOgrenciNo.Text = secilen.ogrenciId.ToString();
-            txtAd.Text = secilen.ogrenciAd;
-            txtSoyad.Text = secilen.ogrenciSoyad;
-            txt1Sinav.Text = secilen.ogrenci1Sinav.ToString();
-            txt2Sinav.Text = secilen.ogrenci2Sinav.ToString();
-            txtOrtalama.Text = secilen.ortalama.ToString();
+            secilenid = (int)dataGridView1.CurrentRow.Cells[0].Value;
+            secogr = olist.Find(x => secilenid == x.ogrenciId);
+            txtOgrenciNo.Text = secogr.ogrenciId.ToString();
+            txtAd.Text = secogr.ogrenciAd;
+            txtSoyad.Text = secogr.ogrenciSoyad;
+            txt1Sinav.Text = secogr.ogrenci1Sinav.ToString();
+            txt2Sinav.Text = secogr.ogrenci2Sinav.ToString();
+            txtOrtalama.Text = secogr.ortalama.ToString();
+            //Ortalama secilen = (Ortalama)dataGridView1.CurrentRow.DataBoundItem;
+            //txtOgrenciNo.Text = secilen.ogrenciId.ToString();
+            //txtAd.Text = secilen.ogrenciAd;
+            //txtSoyad.Text = secilen.ogrenciSoyad;
+            //txt1Sinav.Text = secilen.ogrenci1Sinav.ToString();
+            //txt2Sinav.Text = secilen.ogrenci2Sinav.ToString();
+            //txtOrtalama.Text = secilen.ortalama.ToString();
         }
     }
 }
